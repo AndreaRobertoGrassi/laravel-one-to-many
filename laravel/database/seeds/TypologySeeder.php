@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use App\Task;
+use App\Typology;
 
 class TypologySeeder extends Seeder
 {
@@ -11,6 +13,11 @@ class TypologySeeder extends Seeder
      */
     public function run()
     {
-        //
+        factory(Typology::class, 10)
+            -> create() 
+            -> each(function($typ){
+            $tasks = Task::inRandomOrder() ->limit(5)->get();
+            $typ -> tasks() -> attach($tasks);      //attach aggiunge le $tasks a typology
+        });
     }
 }

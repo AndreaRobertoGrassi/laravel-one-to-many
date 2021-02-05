@@ -2,5 +2,9 @@
 
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', 'MainController@index')->name('emp-index');
-Route::get('/show{id}', 'MainController@show')->name('emp-show');
+Route::get('/', 'MainController@empIndex')->name('emp-index');
+Route::get('/show{id}', 'MainController@empShow')->name('emp-show');
+Route::get('/tasks', 'MainController@taskIndex')->name('task-index');
+Route::get('/tasks{id}', 'MainController@taskShow')->name('task-show');
+
+
