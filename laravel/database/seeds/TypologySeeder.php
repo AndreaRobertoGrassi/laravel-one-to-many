@@ -16,7 +16,7 @@ class TypologySeeder extends Seeder
         factory(Typology::class, 10)
             -> create() 
             -> each(function($typ){
-            $tasks = Task::inRandomOrder() ->limit(5)->get();
+            $tasks = Task::inRandomOrder() ->limit(rand(1,5))->get();
             $typ -> tasks() -> attach($tasks);      //attach aggiunge le $tasks a typology
         });
     }
