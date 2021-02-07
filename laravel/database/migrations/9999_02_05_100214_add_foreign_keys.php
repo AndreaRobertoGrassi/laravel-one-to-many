@@ -35,7 +35,7 @@ class AddForeignKeys extends Migration
             $table -> dropForeign('tt-task');
         });
          Schema::table('tasks', function (Blueprint $table) {
-            $table -> dropForeign('task-employee');        //drink-bottle serve solo per fare riferimento oppure potevo inserire [bottle-id]
+            $table -> dropForeign('task-employee');        //task-employee serve solo per fare riferimento oppure potevo inserire ['employee_id']
         });
     }
 }

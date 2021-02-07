@@ -13,8 +13,8 @@ class MainController extends Controller
         $employees=Employee::all();
         return view('pages.emp-index ', compact('employees'));
     }
-    public function empShow($id){
-        $employee=Employee::findOrFail($id);
+    public function empShow(Employee $employee){              //con (Employee $employee) e passando nella rotta il parametro employee, non serve il findOrFail
+        // $employee=Employee::findOrFail($id);
         return view('pages.emp-show', compact('employee'));
     }
 
@@ -26,6 +26,7 @@ class MainController extends Controller
         $task=Task::findOrFail($id);
         return view('pages.task-show', compact('task'));
     }
+    
     public function typIndex(){
         $types=Typology::all();
         return view('pages.typ-index', compact('types'));

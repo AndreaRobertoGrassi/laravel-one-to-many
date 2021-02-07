@@ -7,6 +7,7 @@
         {{$employee-> dateOfBirth}}
     </h1>
     
+    <h1>Tasks</h1>
     <ul>
         @foreach ($employee -> tasks as $task)
             <li>

@@ -11,4 +11,5 @@
             </li>
         @endforeach
     </ul>    
+    <h1>Vai a <a href="{{route('typ-index')}}">Typologies</a></h1>
 @endsection
