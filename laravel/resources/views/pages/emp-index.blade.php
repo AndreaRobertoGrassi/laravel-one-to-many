@@ -10,5 +10,5 @@
             </li>
         @endforeach
     </ul>
-    <h1>Vai a <a href="{{route('tasks.index')}}">Tasks</a></h1>
+    <h1>Vai a <a href="{{route('home')}}">HOME</a></h1>
 @endsection

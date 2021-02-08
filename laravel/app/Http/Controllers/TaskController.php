@@ -13,15 +13,18 @@ class TaskController extends Controller
         $tasks=task::all();
         return view('pages.task-index', compact('tasks'));
     }
+
     public function show($id){
         $task=Task::findOrFail($id);
         return view('pages.task-show', compact('task'));
     }
+
     public function create(){
         $employees=Employee::all();
         $typologies = Typology::all();
         return view('pages.task-create', compact('employees', 'typologies'));
     }
+
     public function store(Request $request){
         $data = $request -> all();
 
@@ -35,12 +38,14 @@ class TaskController extends Controller
 
         return redirect()-> route('tasks.show', compact('task', 'typs'));
     }
+
     public function edit($id) {
         $employees = Employee::all();
         $typologies = Typology::all();
         $task = Task::findOrFail($id);
         return view('pages.task-edit', compact('employees', 'typologies', 'task'));
     }
+    
     public function update(Request $request, $id) {
         $data = $request -> all();
         // dd($data);

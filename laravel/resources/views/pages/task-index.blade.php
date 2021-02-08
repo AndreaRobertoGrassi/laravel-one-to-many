@@ -13,5 +13,5 @@
             </li>
         @endforeach
     </ul>    
-    <h1>Vai a <a href="{{route('typologies.index')}}">Typologies</a></h1>
+    <h1>Vai a <a href="{{route('home')}}">HOME</a></h1>
 @endsection

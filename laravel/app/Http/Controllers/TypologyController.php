@@ -24,7 +24,7 @@ class TypologyController extends Controller
         $data = $request -> all();
         $tasks = Task::findOrFail($data['tasks']);
         $typ=Typology::create($data);
-        $typ -> tasks() -> attach($tasks); 
+        $typ -> tasks() -> attach($tasks);       
         return redirect()-> route('typologies.show', $typ-> id);
     }
     public function edit($id) {
@@ -34,13 +34,11 @@ class TypologyController extends Controller
     }
     public function update(Request $request, $id) {
         $data = $request -> all();
-        // dd($data);
-        $tasks = Task::findOrFail($data['tasks']);
+        $task = Task::findOrFail($data['tasks']);
         $typ = Typology::findOrFail($id);
         $typ -> update($data);
-        $typ -> tasks() -> associate($tasks);
         $typ -> save();
-        $typ -> tasks() -> sync($tasks);
-        return redirect() -> route('tasks.show', compact('typ'));
+        $typ -> tasks() -> sync($task);  //agisce solo in caso di modifica mentre l'attach aggiunge ciò che è selezionato
+        return redirect() -> route('typologies.show', $typ-> id);
     }
 }

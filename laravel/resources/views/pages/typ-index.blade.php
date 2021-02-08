@@ -1,7 +1,7 @@
 @extends('layouts.main-layout')
 @section('content')
-<h1>Typologies</h1>
-<h3>Create a new <a href="{{route('typologies.create')}}">Typology</a></h3>
+    <h1>Typologies</h1>
+    <h3>Create a new <a href="{{route('typologies.create')}}">Typology</a></h3>
     <ul>
         @foreach ($types as $typ)
             <li>
@@ -10,4 +10,5 @@
             </li>
         @endforeach
     </ul>
+    <h1>Vai a <a href="{{route('home')}}">HOME</a></h1>
 @endsection
