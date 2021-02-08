@@ -27,16 +27,16 @@ class TaskController extends Controller
 
     public function store(Request $request){
         $data = $request -> all();
-
-        $employee = Employee::findOrFail($data['employee_id']);
-        $task = Task::make($request -> all());
+        
+        $task = Task::make($request -> all());      
+        $employee = Employee::findOrFail($data['employee_id']);  
         $task -> employee() -> associate($employee);
         $task -> save();
 
         $typs = Typology::findOrFail($data['typologies']);
         $task -> typologies() -> attach($typs);
 
-        return redirect()-> route('tasks.show', compact('task', 'typs'));
+        return redirect()-> route('tasks.show', compact('task'));
     }
 
     public function edit($id) {
@@ -45,17 +45,17 @@ class TaskController extends Controller
         $task = Task::findOrFail($id);
         return view('pages.task-edit', compact('employees', 'typologies', 'task'));
     }
-    
+
     public function update(Request $request, $id) {
         $data = $request -> all();
-        // dd($data);
         $emp = Employee::findOrFail($data['employee_id']);
         $task = Task::findOrFail($id);
-        $task -> update($data);
         $task -> employee() -> associate($emp);
-        $task -> save();
+        $task -> update($data);
+        // $task -> save();    non serve 
         $typs = Typology::findOrFail($data['typologies']);
         $task -> typologies() -> sync($typs);
+        
         return redirect() -> route('tasks.show', compact('task'));
     }
 }

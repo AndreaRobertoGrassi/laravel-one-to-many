@@ -27,13 +27,14 @@
 
     <select name="employee_id">         {{--selezionare un employee--}}
         @foreach ($employees as $employee)
-        <option value="{{ $employee -> id }}" @if ($task -> employee -> id == $employee -> id)
-            selected
-            @endif
-            >
-            {{ $employee -> name }}
-            {{ $employee -> lastname }}
-        </option>
+            <option value="{{ $employee -> id }}"
+                @if ($task -> employee -> id == $employee -> id)     {{--verifico che l'employee associato sia uguale--}}
+                    selected
+                @endif
+                >
+                {{ $employee -> name }}
+                {{ $employee -> lastname }}
+            </option>
         @endforeach
     </select>
 

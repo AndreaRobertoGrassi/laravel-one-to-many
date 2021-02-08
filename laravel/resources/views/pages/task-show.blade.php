@@ -16,5 +16,7 @@
             </li>
         @endforeach
     </ul>
+
+    <h1>Torna a <a href="{{route('tasks.index')}}">Task-index</a></h1>
     
 @endsection

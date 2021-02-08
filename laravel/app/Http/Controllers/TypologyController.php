@@ -12,32 +12,37 @@ class TypologyController extends Controller
         $types=Typology::all();
         return view('pages.typ-index', compact('types'));
     }
+
     public function show($id){
         $typ=Typology::findOrFail($id);
         return view('pages.typ-show', compact('typ'));
     }
+
     public function create(){
         $tasks = Task::all();
         return view('pages.typ-create', compact('tasks'));
     }
+
     public function store(Request $request){
         $data = $request -> all();
-        $tasks = Task::findOrFail($data['tasks']);
         $typ=Typology::create($data);
+        $tasks = Task::findOrFail($data['tasks']);
         $typ -> tasks() -> attach($tasks);       
         return redirect()-> route('typologies.show', $typ-> id);
     }
+
     public function edit($id) {
         $tasks = Task::all();
         $typ = Typology::findOrFail($id);
         return view('pages.typ-edit', compact('tasks', 'typ'));
     }
+
     public function update(Request $request, $id) {
         $data = $request -> all();
         $task = Task::findOrFail($data['tasks']);
         $typ = Typology::findOrFail($id);
         $typ -> update($data);
-        $typ -> save();
+        // $typ -> save();    non serve
         $typ -> tasks() -> sync($task);  //agisce solo in caso di modifica mentre l'attach aggiunge ciò che è selezionato
         return redirect() -> route('typologies.show', $typ-> id);
     }
