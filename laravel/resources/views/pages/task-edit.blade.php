@@ -6,7 +6,7 @@
 </h1>
 <form action="{{ route('tasks.update', $task -> id) }}" method="post">
     @csrf
-    @method('post')
+    @method('put')   {{-- update supporta put --}}
     <label for="title">Title</label>
     <input name="title" type="text" value="{{ $task -> title }}">
     <br>

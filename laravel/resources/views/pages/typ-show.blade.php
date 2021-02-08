@@ -10,5 +10,6 @@
 
         @endforeach
     </ul>
+    <h1>Torna a <a href="{{route('typologies.index')}}">Typologies index</a></h1>
 
 @endsection
