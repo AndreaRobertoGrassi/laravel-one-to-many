@@ -4,7 +4,7 @@
     <ul>
         @foreach ($types as $typ)
             <li>
-                <a href="{{route('typ-show', $typ -> id)}}">{{$typ-> name}}</a>
+                <a href="{{route('typologies.show', $typ -> id)}}">{{$typ-> name}}</a>
             </li>
         @endforeach
     </ul>

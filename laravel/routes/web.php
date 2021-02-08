@@ -2,12 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', 'MainController@empIndex')->name('emp-index');
-Route::get('/show{employee}', 'MainController@empShow')->name('emp-show');
-Route::get('/tasks', 'MainController@taskIndex')->name('task-index');
-Route::get('/tasks{id}', 'MainController@taskShow')->name('task-show');
-Route::get('/typology', 'MainController@typIndex')->name('typ-index');
-Route::get('/typology{id}', 'MainController@typShow')->name('typ-show');
-
-
-//Route::resource('employees', 'MainController');    //crea in automatico tutte le rotte per employees
+Route::get('/', 'HomeController@index')-> name('home');
+Route::resource('employees', 'EmployeeController');    //crea in automatico tutte le rotte per employees
+Route::resource('tasks', 'TaskController');    //crea in automatico tutte le rotte per tasks
+Route::resource('typologies', 'TypologyController');    //crea in automatico tutte le rotte per typologies

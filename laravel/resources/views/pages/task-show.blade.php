@@ -11,8 +11,8 @@
     <ul>
         @foreach ($task -> typologies as $typology)
             <li>
-                {{$typology-> name}}
-                {{$typology-> description}}
+                Name: {{$typology-> name}} <br>
+                Description: {{$typology-> description}}
             </li>
         @endforeach
     </ul>
