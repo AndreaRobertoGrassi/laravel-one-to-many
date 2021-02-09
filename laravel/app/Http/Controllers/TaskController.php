@@ -29,12 +29,23 @@ class TaskController extends Controller
     public function store(Request $request){
         $data = $request -> all();
         
+         Validator::make($data,[          //validazione
+            'title'=>'required',
+            'description'=>'required',
+            'priority'=>'required|integer|min:1|max:5'
+        ])-> validate();
+
         $task = Task::make($request -> all());      
         $employee = Employee::findOrFail($data['employee_id']);  
         $task -> employee() -> associate($employee);
         $task -> save();
 
-        $typs = Typology::findOrFail($data['typologies']);
+        if (array_key_exists('typs', $data)) {
+            $typs = Typology::findOrFail($data['typologies']);
+        }else {
+            $typs=[];
+        }
+        
         $task -> typologies() -> attach($typs);
 
         return redirect()-> route('tasks.show', compact('task'));
@@ -50,8 +61,10 @@ class TaskController extends Controller
     public function update(Request $request, $id) {
         $data = $request -> all();
 
-        Validator::make($data,[          //validazione
+         Validator::make($data,[          //validazione
             'title'=>'required',
+            'description'=>'required',
+            'priority'=>'required|integer|min:1|max:5'
         ])-> validate();
 
         $emp = Employee::findOrFail($data['employee_id']);

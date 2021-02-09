@@ -26,8 +26,20 @@ class TypologyController extends Controller
 
     public function store(Request $request){
         $data = $request -> all();
+
+        Validator::make($data,[          //validazione
+            'name'=>'required|unique:App\Typology',       
+            'description'=>'required'
+        ])-> validate();
+        
         $typ=Typology::create($data);
-        $tasks = Task::findOrFail($data['tasks']);
+        
+        if (array_key_exists('tasks', $data)) {
+            $tasks = Task::findOrFail($data['tasks']);
+        }else {
+            $tasks=[];
+        }
+
         $typ -> tasks() -> attach($tasks);       
         return redirect()-> route('typologies.show', $typ-> id);
     }
@@ -42,7 +54,8 @@ class TypologyController extends Controller
         $data = $request -> all();
 
         Validator::make($data,[          //validazione
-            'name'=>'required',
+            'name'=>'required|unique:App\Typology',
+            'description'=>'required'
         ])-> validate();
 
         $typ = Typology::findOrFail($id);
