@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 use App\Employee;
 use App\Task;
 use App\Typology;
@@ -48,12 +49,22 @@ class TaskController extends Controller
 
     public function update(Request $request, $id) {
         $data = $request -> all();
+
+        Validator::make($data,[          //validazione
+            'title'=>'required',
+        ])-> validate();
+
         $emp = Employee::findOrFail($data['employee_id']);
         $task = Task::findOrFail($id);
         $task -> employee() -> associate($emp);
         $task -> update($data);
         // $task -> save();    non serve 
-        $typs = Typology::findOrFail($data['typologies']);
+        if (array_key_exists('typs', $data)) {
+            $typs = Typology::findOrFail($data['typologies']);
+        }else {
+            $typs=[];
+        }
+        
         $task -> typologies() -> sync($typs);
         
         return redirect() -> route('tasks.show', compact('task'));

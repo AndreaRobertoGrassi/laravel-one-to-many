@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 use App\Task;
 use App\Typology;
 
@@ -39,11 +40,21 @@ class TypologyController extends Controller
 
     public function update(Request $request, $id) {
         $data = $request -> all();
-        $task = Task::findOrFail($data['tasks']);
+
+        Validator::make($data,[          //validazione
+            'name'=>'required',
+        ])-> validate();
+
         $typ = Typology::findOrFail($id);
         $typ -> update($data);
         // $typ -> save();    non serve
-        $typ -> tasks() -> sync($task);  //agisce solo in caso di modifica mentre l'attach aggiunge ciò che è selezionato
+        if (array_key_exists('tasks', $data)) {
+            $tasks = Task::findOrFail($data['tasks']);
+        }else {
+            $tasks=[];
+        }
+        $typ -> tasks() -> sync($tasks);  //agisce solo in caso di modifica mentre l'attach aggiunge ciò che è selezionato
+        
         return redirect() -> route('typologies.show', $typ-> id);
     }
 }
