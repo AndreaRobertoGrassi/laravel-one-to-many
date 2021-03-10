@@ -12,6 +12,6 @@ class Employee extends Model
         'dateOfBirth'
     ];
     public function tasks(){      //relazione one to many
-        return $this-> hasMany(Task::class);      //dentro le parentesi acrei potuto mettere App\Drink
+        return $this-> hasMany(Task::class);    
     }
 }
